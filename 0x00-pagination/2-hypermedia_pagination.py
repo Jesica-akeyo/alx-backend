@@ -59,6 +59,7 @@ class Server:
                 'next_page': next, 'prev_page': prev, 'total_pages': total}
 
 
+<<<<<<< HEAD
 def index_range(page, page_size):
     """
     function named index_range that takes two integer arguments:
@@ -71,3 +72,13 @@ def index_range(page, page_size):
     """
     previous = (page - 1) * page_size
     return (previous, previous + page_size)
+=======
+        data = {
+            'index': index,
+            'data': returned_data,
+            'page_size': page_size,
+            'next_index': next_index,
+            }
+
+        return data
+>>>>>>> 2d68e88c3afe3c2034650dceda7c54778307569e
