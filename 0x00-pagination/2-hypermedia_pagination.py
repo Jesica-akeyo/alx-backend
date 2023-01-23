@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
-"""
-function named index_range that takes two integer arguments page and page_size
-"""
+''' self descriptive  '''
 import csv
 import math
-from typing import List
+from typing import Tuple, List, Dict
+
+
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
+    '''self descriptive'''
+    return (((page - 1) * page_size), (page * page_size))
 
 
 class Server:
@@ -27,58 +30,27 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """
-        Use assert to verify that both arguments are integers greater than 0
-        Use index_range to find the correct indexes
-        to paginate the dataset correctly
-        and return the appropriate page of the dataset
-        (i.e. the correct list of rows)
-        """
-        assert (isinstance(page, int) and isinstance(page_size, int)
-                and page > 0 and page_size > 0)
-        range = index_range(page, page_size)
-        self.dataset()
-        return self.__dataset[range[0]:range[1]]
+        '''self descriptive'''
+        assert isinstance(page, int), "page should be integer"
+        assert isinstance(page_size, int), "page_size should be integer"
+        assert page > 0, "page should be greater than 0"
+        assert page_size > 0, "page_size should be greater than 0"
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """
-        A method that takes the same arguments (and defaults) as get_page
-        and returns a dictionary containing the following key-value pairs:
-        page_size: the length of the returned dataset page
-        page: the current page number
-        data: the dataset page (equivalent to return from previous task)
-        next_page: number of the next page, None if no next page
-        prev_page: number of the previous page, None if no previous page
-        total_pages: the total number of pages in the dataset as an integer
-        """
+        start, end = index_range(page, page_size)
+        return self.dataset()[start:end]
+
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[str, any]:
+        '''self descriptive'''
         data = self.get_page(page, page_size)
-        total = math.ceil(len(self.__dataset) / page_size)
-        next = page + 1 if page < total else None
-        prev = page - 1 if page > 1 else None
-        return {'page_size': len(data), 'page': page, 'data': data,
-                'next_page': next, 'prev_page': prev, 'total_pages': total}
+        total_pages = math.ceil(len(self.dataset()) / page_size)
+        next_page = page + 1 if page < total_pages else None
+        prev_page = page - 1 if page > 1 else None
 
-
-<<<<<<< HEAD
-def index_range(page, page_size):
-    """
-    function named index_range that takes two integer arguments:
-    page and page_size.
-    The function should return a tuple of size two containing:
-    a start index and an end index corresponding to
-    the range of indexes to return in a list
-    for those particular pagination parameters.
-    Page numbers are 1-indexed, i.e. the first page is page 1.
-    """
-    previous = (page - 1) * page_size
-    return (previous, previous + page_size)
-=======
-        data = {
-            'index': index,
-            'data': returned_data,
-            'page_size': page_size,
-            'next_index': next_index,
-            }
-
+        data = {'page_size': len(data),
+                'page': page,
+                'data': data,
+                'next_page': next_page,
+                'prev_page': prev_page,
+                'total_pages': total_pages,
+                }
         return data
->>>>>>> 2d68e88c3afe3c2034650dceda7c54778307569e
