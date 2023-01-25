@@ -14,7 +14,8 @@ class FIFOCache(BaseCaching):
     def put(self, key, item):
         ''' assign to the dict self.cache_data the item value for the key
         if key or item is None, this smethod shouldnt do anyting
-        if number of items in self.cache_data is higher than BaseCaching.MAX_ITEMS
+        if number of items in self.cache_data is higher
+        than BaseCaching.MAX_ITEMS
         - you dicard the first item put in Cache '''
         if key and item:
             if key in self.cache_data:
