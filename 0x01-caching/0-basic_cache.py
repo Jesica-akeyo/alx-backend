@@ -5,7 +5,8 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 
 class BasicCache(BaseCaching):
-    ''' class '''
+    ''' class BasicCache that inherits from BaseCaching and is a 
+    caching system '''
 
     def put(self, key, item):
         ''' assign to the dict self.cache_data the item value for thw key '''
